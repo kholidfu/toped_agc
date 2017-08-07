@@ -1,5 +1,7 @@
-Tokopedia Feed Parser
-Store into Mongo
-Markup the price
-Show Google Form
-Ready to dropship
+
+Build a dropship store using Tokopedia Data
+
+- Markup the price
+- Show Google Form when Visitor Click Buy
+- Admin process the order from bukalapak
+
