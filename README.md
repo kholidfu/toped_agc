@@ -31,12 +31,13 @@
 So much work todo, easy brad... Do it one by one...
 
 ### BACKEND
+- [x] remove phone number from description (with regex)
+- [x] remove LINE from description
 - [ ] full-text-search on title and description
 - [ ] save hot product via stats
 - [ ] save customer dbase
 - [ ] generate fake review but fixed (separate collection,
   i.e. review)
-- [ ] remove phone number from description (with regex)
 - [ ] save image
 - [ ] show related product
 - [ ] fix pricing
