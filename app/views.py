@@ -3,8 +3,13 @@ import re
 from flask import render_template
 from app import app
 
+from pymongo import MongoClient
 import feedparser
 
+
+# build db connections
+client = MongoClient()
+db = client.toped
 
 @app.template_filter('get_harga')
 def get_harga(s):
@@ -37,7 +42,7 @@ def index():
 @app.route("/view/<productid>")
 def detail(productid):
     """Show item."""
-    pass
+    return productid
 
 @app.route("/about")
 def about():
@@ -53,4 +58,3 @@ def privacy():
 def dmca():
     """DMCA Page."""
     return render_template("dmca.html")
-
