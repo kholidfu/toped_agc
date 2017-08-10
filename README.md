@@ -42,3 +42,12 @@ List of Todo's:
 - show fake review (more is better)
 - show related product
 - 
+
+### SEO
+#### ONPAGE
+- h1, h2, h3
+- show latest product in single page
+- breadcrumb
+- feed
+- sitemap
+- pinger
