@@ -16,11 +16,11 @@
   page.
 
 ## PRICING
-If price < 50.000: price * 2
-If price 50.000 - 100.000: price * 1.5
-If price 100.000 - 150.000: price * 1.3
-If price 150.000 - 200.000: price * 1.25
-If price > 200.000: price * 1.2
+- If price < 50.000: price * 2
+- If price 50.000 - 100.000: price * 1.5
+- If price 100.000 - 150.000: price * 1.3
+- If price 150.000 - 200.000: price * 1.25
+- If price > 200.000: price * 1.2
 
 ## TODO
 List of Todo's:
