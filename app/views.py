@@ -7,6 +7,7 @@ from pymongo import MongoClient
 import feedparser
 import requests
 from bs4 import BeautifulSoup as bs
+import shortuuid
 
 
 # build db connections
@@ -36,6 +37,23 @@ def markup(price):
     """return markuped price"""
     return "{:0,.0f}".format(int(int(price) * 2.0)).replace(",", ".")
 
+@app.template_filter('markup_price_for_detail_page')
+def markup_price_for_detail_page(price):
+    """return markuped price."""
+    price = price.replace(".", "")
+    price = int(price)
+    price = price * 2.0
+    return "{:0,.0f}".format(price).replace(",", ".")
+
+@app.template_filter('mongoinsert')
+def mongoinsert(url):
+    # import pdb; pdb.set_trace()
+    item_exist = db.product.find_one(url)
+    oid = shortuuid.uuid(name=url)
+    if not item_exist:
+        db.product.insert({'url': url, 'oid': oid})
+    return oid
+
 @app.route("/")
 def index():
     """
@@ -47,13 +65,27 @@ def index():
     data = data['entries']
     return render_template("index.html", data=data)
 
-@app.route("/product/<path:productpath>")
-def detail(productpath):
+@app.route("/product/<oid>")
+def detail(oid):
     """Show item."""
-    html = requests.get(productpath).content
-    # import pdb; pdb.set_trace()
+    url = db.product.find_one({'oid': oid})['url']
+    html = requests.get(url).content
     soup = bs(html, "lxml")
-    return soup.title.text
+    title = soup.find('h1').text
+    description = soup.find(itemprop='description')
+    price = soup.find(itemprop='price').text
+    # get images and replace thumbnail (100-square) with bigger one (300-square)
+    raw_images = [i['src'] for i in soup.findAll(itemprop='image')]
+    images = []
+    for i in raw_images:
+        if '100-square' in i:
+            images.append(i.replace('100-square', '300-square'))
+        else:
+            images.append(i)
+    # insert into db
+    data = {'title': title, 'description': description, 'price': price, 'images': images}
+    # render in template
+    return render_template("detail.html", data=data)
 
 @app.route("/about")
 def about():
