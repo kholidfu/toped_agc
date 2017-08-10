@@ -48,7 +48,7 @@
 	{% for i in data %}
         <div class="col-sm-4 col-lg-4 col-md-4">
           <div class="thumbnail">
-            <img src="{{ i['summary']|get_image }}" alt="{{ i['title'] }}">
+            <a href="{{ url_for('detail', productpath=i['link']) }}"><img src="{{ i['summary']|get_image }}" alt="{{ i['title'] }}"></a>
             <div class="caption">
               <h4 class="pull-right">Rp{{ i['summary']|get_harga|markup }}</h4>
               <h4><a href="#">&nbsp;</a>
