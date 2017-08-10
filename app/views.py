@@ -40,9 +40,9 @@ def markup(price):
 @app.template_filter('markup_price_for_detail_page')
 def markup_price_for_detail_page(price):
     """return markuped price."""
-    price = price.replace(".", "")
-    price = int(price)
-    price = price * 2.0
+    # price = price.replace(".", "")
+    # price = int(price)
+    # price = price * 2.0
     return "{:0,.0f}".format(price).replace(",", ".")
 
 @app.template_filter('mongoinsert')
@@ -68,7 +68,8 @@ def index():
 @app.route("/product/<oid>")
 def detail(oid):
     """Show item."""
-    url = db.product.find_one({'oid': oid})['url']
+    item = db.product.find_one({'oid': oid})
+    url = item['url']
     html = requests.get(url).content
     soup = bs(html, "lxml")
     title = soup.find('h1').text
@@ -82,8 +83,18 @@ def detail(oid):
             images.append(i.replace('100-square', '300-square'))
         else:
             images.append(i)
+
+    # structuring data
+    # turn price into int
+    price = int(price.replace('.', '')) * 2
+    # convert into string
+    description = str(description)
+    data = {'title': title, 'description': description, 'price':
+            price, 'images': images}
+    
     # insert into db
-    data = {'title': title, 'description': description, 'price': price, 'images': images}
+    db.product.update_one({'oid': oid}, {"$set": data}, upsert=True)
+            
     # render in template
     return render_template("detail.html", data=data)
 
