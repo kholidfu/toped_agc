@@ -53,6 +53,7 @@ So much work todo, easy brad... Do it one by one...
 ### SEO
 #### ONPAGE
 - [ ] h1, h2, h3
+- [ ] title, meta desc, feed url
 - [ ] show latest product in single page
 - [ ] breadcrumb
 - [ ] feed
