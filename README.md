@@ -31,22 +31,24 @@
 So much work todo, easy brad... Do it one by one...
 
 ### BACKEND
+- [ ] full-text-search on title and description
 - [ ] save hot product via stats
 - [ ] save customer dbase
-- [ ] generate fake review but fixed
+- [ ] generate fake review but fixed (separate collection,
+  i.e. review)
 - [ ] remove phone number from description (with regex)
 - [ ] save image
 - [ ] show related product
 - [ ] fix pricing
 
 ### FRONT-END
-- [ ] better template to ensure customers
-- [ ] show form for order
 - [ ] show buy button
-- [ ] only show images if it exists
+- [ ] show form for order
 - [ ] show fake review (more is better)
 - [ ] show related product
-- 
+- [ ] better template to ensure customers
+- [ ] only show images if it exists
+- [ ] show price range
 
 ### SEO
 #### ONPAGE
