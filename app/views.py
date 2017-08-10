@@ -47,8 +47,7 @@ def markup_price_for_detail_page(price):
 
 @app.template_filter('mongoinsert')
 def mongoinsert(url):
-    # import pdb; pdb.set_trace()
-    item_exist = db.product.find_one(url)
+    item_exist = db.product.find_one({'url': url})
     oid = shortuuid.uuid(name=url)
     if not item_exist:
         db.product.insert({'url': url, 'oid': oid})
@@ -67,14 +66,22 @@ def index():
 
 @app.route("/product/<oid>")
 def detail(oid):
-    """Show item."""
+    """Steps:
+    - Get HTML
+    - Souped with BS4
+    - Extract Needed Data
+    - Update into DB using URL as OID identifier
+    """
     item = db.product.find_one({'oid': oid})
     url = item['url']
     html = requests.get(url).content
     soup = bs(html, "lxml")
+
+    # EXTRACT NEEDED DATA
     title = soup.find('h1').text
     description = soup.find(itemprop='description')
     price = soup.find(itemprop='price').text
+    
     # get images and replace thumbnail (100-square) with bigger one (300-square)
     raw_images = [i['src'] for i in soup.findAll(itemprop='image')]
     images = []
@@ -84,18 +91,18 @@ def detail(oid):
         else:
             images.append(i)
 
-    # structuring data
-    # turn price into int
+    # STRUCTURING DATA
+    ## turn price into int
     price = int(price.replace('.', '')) * 2
     # convert into string
     description = str(description)
     data = {'title': title, 'description': description, 'price':
             price, 'images': images}
     
-    # insert into db
+    # INSERT INTO DB
     db.product.update_one({'oid': oid}, {"$set": data}, upsert=True)
             
-    # render in template
+    # RENDER DATA INTO TEMPLATE
     return render_template("detail.html", data=data)
 
 @app.route("/about")
