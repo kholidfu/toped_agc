@@ -2,7 +2,11 @@
 # Build a dropship store using Tokopedia Data
 - Markup the price
 - Show Google Form when Visitor Click Buy
-- Admin process the order from bukalapak
+- Admin process the order from Vendor
+
+# Purpose
+- Get money from dropship price difference
+- Get data about what product is currently HOT on market
 
 ## Detail View
 - Price (markup)
