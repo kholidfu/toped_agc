@@ -5,6 +5,8 @@ from app import app
 
 from pymongo import MongoClient
 import feedparser
+import requests
+from bs4 import BeautifulSoup as bs
 
 
 # build db connections
@@ -14,17 +16,20 @@ db = client.toped
 @app.template_filter('get_harga')
 def get_harga(s):
     """Return harga."""
-    return re.search(re.compile(r"Harga : Rp (.*?) <br>"), s).group(1).replace('.', '')
+    pattern = re.compile(r"Harga : Rp (.*?) <br>")
+    return re.search(pattern, s).group(1).replace('.', '')
 
 @app.template_filter('get_image')
 def get_image(s):
     """Return image source URL."""
-    return re.search(re.compile(r"img src=\"(.*?)\"" ), s).group(1).replace('100-square', '200-square')
+    pattern = re.compile(r"img src=\"(.*?)\"" )
+    return re.search(pattern, s).group(1).replace('100-square', '200-square')
 
 @app.template_filter('get_lokasi')
 def get_lokasi(s):
     """Return location string."""
-    return re.search(re.compile(r"Lokasi : (.*?) <br>"), s).group(1)
+    pattern = re.compile(r"Lokasi : (.*?) <br>")
+    return re.search(pattern, s).group(1)
 
 @app.template_filter('markup')
 def markup(price):
@@ -33,16 +38,22 @@ def markup(price):
 
 @app.route("/")
 def index():
-    """Show latest item from feed."""
+    """
+    - Show latest item from feed.
+    - URL target (tokped), masked with shortuuid.
+    """
     url = "https://www.tokopedia.com/feed?sc=78"
     data = feedparser.parse(url)
     data = data['entries']
     return render_template("index.html", data=data)
 
-@app.route("/view/<productid>")
-def detail(productid):
+@app.route("/product/<path:productpath>")
+def detail(productpath):
     """Show item."""
-    return productid
+    html = requests.get(productpath).content
+    # import pdb; pdb.set_trace()
+    soup = bs(html, "lxml")
+    return soup.title.text
 
 @app.route("/about")
 def about():
@@ -58,3 +69,27 @@ def privacy():
 def dmca():
     """DMCA Page."""
     return render_template("dmca.html")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
