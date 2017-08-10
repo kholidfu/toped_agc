@@ -23,31 +23,32 @@
 - If price > 200.000: price * 1.2
 
 ## TODO
-List of Todo's:
+
+So much work todo, easy brad... Do it one by one...
 
 ### BACKEND
-- save hot product via stats
-- save customer dbase
-- generate fake review but fixed
-- remove phone number from description (with regex)
-- save image
-- show related product
-- fix pricing
+- [ ] save hot product via stats
+- [ ] save customer dbase
+- [ ] generate fake review but fixed
+- [ ] remove phone number from description (with regex)
+- [ ] save image
+- [ ] show related product
+- [ ] fix pricing
 
 ### FRONT-END
-- better template to ensure customers
-- show form for order
-- show buy button
-- only show images if it exists
-- show fake review (more is better)
-- show related product
+- [ ] better template to ensure customers
+- [ ] show form for order
+- [ ] show buy button
+- [ ] only show images if it exists
+- [ ] show fake review (more is better)
+- [ ] show related product
 - 
 
 ### SEO
 #### ONPAGE
-- h1, h2, h3
-- show latest product in single page
-- breadcrumb
-- feed
-- sitemap
-- pinger
+- [ ] h1, h2, h3
+- [ ] show latest product in single page
+- [ ] breadcrumb
+- [ ] feed
+- [ ] sitemap
+- [ ] pinger
