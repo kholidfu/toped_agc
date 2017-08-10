@@ -58,6 +58,7 @@ def index():
     """
     - Show latest item from feed.
     - URL target (tokped), masked with shortuuid.
+    - Insert URL and OID into db, later will be updated by single page.
     """
     url = "https://www.tokopedia.com/feed?sc=78"
     data = feedparser.parse(url)
@@ -96,11 +97,17 @@ def detail(oid):
     price = int(price.replace('.', '')) * 2
     # convert into string
     description = str(description)
-    data = {'title': title, 'description': description, 'price':
+
+    ## newly scraped data
+    scraped_data = {'title': title, 'description': description, 'price':
             price, 'images': images}
     
     # INSERT INTO DB
-    db.product.update_one({'oid': oid}, {"$set": data}, upsert=True)
+    if item.get('title'):
+        data = db.product.find_one({'url': url})
+    else:
+        db.product.update_one({'oid': oid}, {"$set": scraped_data}, upsert=True)
+        data = db.product.find_one({'url': url})
             
     # RENDER DATA INTO TEMPLATE
     return render_template("detail.html", data=data)
@@ -119,27 +126,3 @@ def privacy():
 def dmca():
     """DMCA Page."""
     return render_template("dmca.html")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
