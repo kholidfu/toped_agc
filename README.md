@@ -31,6 +31,7 @@
 So much work todo, easy brad... Do it one by one...
 
 ### BACKEND
+#### MUST
 - [x] remove phone number from description (with regex)
 - [x] remove LINE from description
 - [x] generate fake review but fixed (separate collection,
@@ -41,6 +42,8 @@ So much work todo, easy brad... Do it one by one...
 - [ ] save image
 - [ ] show related product
 - [ ] fix pricing
+#### OPTIONAL
+- [ ] filter only from good reputation seller
 
 ### FRONT-END
 - [ ] show buy button
