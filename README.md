@@ -36,8 +36,8 @@ So much work todo, easy brad... Do it one by one...
 - [x] generate fake review but fixed (separate collection,
   i.e. review) --> /app/resources/review.txt
 - [ ] full-text-search on title and description
-- [ ] save hot product via stats
-- [ ] save customer dbase
+- [ ] add hit counter
+- [ ] save customer data
 - [ ] save image
 - [ ] show related product
 - [ ] fix pricing
