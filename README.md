@@ -8,6 +8,21 @@
 - Get money from dropship price difference
 - Get data about what product is currently HOT on market
 
+Install
+
+## 3rd party lib
+   pip install -r requirements.txt
+## mongo 3.4
+   sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6
+   echo "deb [ arch=amd64,arm64 ] http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.4.list
+   sudo apt-get update && sudo apt-get install -y mongodb-org
+
+# Run
+## mongodb
+   sudo service mongod start
+## Flask
+   FLASK_APP=app/views FLASK_DEBUG=1 flask run
+
 ## Detail View
 - Price (markup)
 - Product Description
