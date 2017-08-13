@@ -8,7 +8,7 @@
 - Get money from dropship price difference
 - Get data about what product is currently HOT on market
 
-Install
+# Dependencies
 
 ## 3rd party lib
    ```
