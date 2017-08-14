@@ -21,6 +21,16 @@
    sudo apt-get update && sudo apt-get install -y mongodb-org
    ```
 
+## Setup Mongo Full-Text Search
+   ```
+   db.product.createIndex( { title: "text", description: "text" } )
+   ```
+
+### Example query
+    ```
+    db.product.find( { $text: { $search: "sepatu" } } )
+    ```
+
 # Run
 ## mongodb
    ```
@@ -59,7 +69,7 @@ So much work todo, easy brad... Do it one by one...
 - [x] remove LINE from description
 - [x] generate fake review but fixed (separate collection,
   i.e. review) --> /app/resources/review.txt
-- [ ] full-text-search on title and description
+- [x] full-text-search on title and description
 - [ ] add hit counter
 - [ ] save customer data
 - [ ] save image
