@@ -70,11 +70,13 @@ So much work todo, easy brad... Do it one by one...
 - [x] generate fake review but fixed (separate collection,
   i.e. review) --> /app/resources/review.txt
 - [x] full-text-search on title and description
-- [ ] add hit counter
+- [x] add hit counter (masih ada bug, incr by 2?)
 - [ ] save customer data
 - [ ] save image
 - [ ] show related product
 - [ ] fix pricing
+- [ ] remove all kind of links from description, kadang kecantol link ke tokopedia
+
 #### OPTIONAL
 - [ ] filter only from good reputation seller
 
