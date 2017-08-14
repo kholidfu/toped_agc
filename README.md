@@ -71,6 +71,7 @@ So much work todo, easy brad... Do it one by one...
   i.e. review) --> /app/resources/review.txt
 - [x] full-text-search on title and description
 - [x] add hit counter (masih ada bug, incr by 2?)
+- [ ] add category using search feature
 - [ ] save customer data
 - [ ] save image
 - [ ] show related product
