@@ -72,8 +72,11 @@ def detail(oid):
     - Souped with BS4
     - Extract Needed Data
     - Update into DB using URL as OID identifier
+    - Hit counter
     """
     item = db.product.find_one({'oid': oid})
+
+    # HTTP Request
     url = item['url']
     html = requests.get(url).content
     soup = bs(html, "lxml")
@@ -108,13 +111,17 @@ def detail(oid):
     scraped_data = {'title': title, 'description': description, 'price':
             price, 'images': images}
     
-    # INSERT INTO DB
+    # RETRIEVE/INSERT DATA INTO DB
     if item.get('title'):
         data = db.product.find_one({'url': url})
     else:
-        db.product.update_one({'oid': oid}, {"$set": scraped_data}, upsert=True)
+        db.product.update_one({'oid': oid}, {
+            "$set": scraped_data}, upsert=True)
         data = db.product.find_one({'url': url})
-            
+
+    # Increment data
+    db.product.update_one({'oid': oid}, {'$inc': {'hits': 1}})
+        
     # RENDER DATA INTO TEMPLATE
     return render_template("detail.html", data=data)
 
