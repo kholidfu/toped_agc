@@ -46,3 +46,21 @@ body {
 footer {
     margin: 50px 0;
 }
+
+.navbar-inverse {
+    background-color: #ff5722;
+    border-color: #ff5722;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #ffffff;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+    color: #f7dcdc;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.3rem;
+}
