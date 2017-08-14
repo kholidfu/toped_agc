@@ -103,6 +103,9 @@ def detail(oid):
     # remove phone number from string ==> https://regex101.com/r/qtEg6H/4
     pattern = r"\(?(?:\+62|62|0)(?:\d{2,3})?\)?[ .-]?\d{2,4}[ .-]?\d{2,4}[ .-]?\d{2,4}"
     description = re.sub(pattern, "", description)
+    # remove url from any given text string
+    pattern = r"http\S+"
+    description = re.sub(pattern, '', description)
     # remove LINE
     pattern = re.compile(r"LINE[ ]?:[ ]?", re.I)
     description = re.sub(pattern, "", description)
