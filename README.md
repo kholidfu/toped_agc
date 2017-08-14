@@ -81,6 +81,8 @@ So much work todo, easy brad... Do it one by one...
 - [ ] filter only from good reputation seller
 
 ### FRONT-END
+- [x] banner on front-page
+- [ ] better font other than default bootstrap
 - [ ] show buy button
 - [ ] show form for order
 - [ ] show fake review (more is better)
