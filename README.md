@@ -27,9 +27,12 @@
    ```
 
 ### Example query
-    ```
+
     db.product.find( { $text: { $search: "sepatu" } } )
-    ```
+
+or in python way
+	
+	db.product.find({'$text': {'$search': 'sepatu'}})
 
 # Run
 ## mongodb
