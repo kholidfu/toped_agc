@@ -5,10 +5,11 @@
 <div class="container">
   <div class="row">
     <div class="col-md-3">
-      <p class="lead">CARI</p>
+      {% include "search_form.html" %}
+      <p class="lead">Trending</p>
       <div class="list-group">
 	{% for category in categories %}
-	<a href="{{ url_for('search', keyword=category) }}" class="list-group-item">{{ categories[category] }}</a>
+	<a href="{{ url_for('category', cat_name=category) }}" class="list-group-item">{{ categories[category] }}</a>
 	{% endfor %}
       </div>
     </div>
