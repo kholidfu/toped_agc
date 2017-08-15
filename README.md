@@ -33,6 +33,10 @@
 or in python way
 	
 	db.product.find({'$text': {'$search': 'sepatu'}})
+	
+search and sort based on text score (this is I used)
+
+	db.product.find({'$text': {'$search': keyword}}, {'score': {'$meta': 'textScore'}}).sort([('score', {'$meta': 'textScore'})])
 
 ### Drop Index
 
