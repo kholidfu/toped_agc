@@ -34,6 +34,17 @@ or in python way
 	
 	db.product.find({'$text': {'$search': 'sepatu'}})
 
+### Drop Index
+
+change index name according to your index name, if default, it's named
+like below
+
+	db.product.dropIndex("title_text_description_text")
+
+### Re-create Index with weight
+
+	db.product.createIndex( { title: "text", description: "text" }, {weights: {title: 10, description: 5}, name: "TextIndex"} )
+
 # Run
 ## mongodb
    ```
@@ -77,6 +88,7 @@ So much work todo, easy brad... Do it one by one...
 - [x] add simple search feature
 - [x] remove all kind of links from description, kadang kecantol link
   ke tokopedia
+- [ ] add more weight to title in search results
 - [ ] search pagination
 - [ ] save customer data
 - [ ] save image
