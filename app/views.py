@@ -128,6 +128,13 @@ def detail(oid):
     # RENDER DATA INTO TEMPLATE
     return render_template("detail.html", data=data)
 
+@app.route("/search/<keyword>")
+def search(keyword):
+    """Search page."""
+    # import pdb; pdb.set_trace()
+    data = db.product.find({'$text': {'$search': keyword}})
+    return render_template("search.html", data=data)
+
 @app.route("/about")
 def about():
     """About page."""
