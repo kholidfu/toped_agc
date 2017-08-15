@@ -105,6 +105,7 @@ So much work todo, easy brad... Do it one by one...
 ### FRONT-END
 - [x] banner on front-page
 - [x] better font other than default bootstrap
+- [ ] show search form
 - [ ] fix image carousel on detail page
 - [ ] show buy button
 - [ ] show form for order
