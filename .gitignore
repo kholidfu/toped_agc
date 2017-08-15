@@ -1,5 +1,6 @@
 *~
 *.pyc
+.Python
 app/__pycache__
 bin/
 include/
