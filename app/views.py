@@ -160,7 +160,7 @@ def detail(oid):
 @app.route("/search/<keyword>")
 def search(keyword):
     """Search page."""
-    data = db.product.find({'$text': {'$search': keyword}})
+    data = db.product.find({'$text': {'$search': keyword}}, {'score': {'$meta': 'textScore'}}).sort([('score', {'$meta': 'textScore'})])
     keyword_title = keyword.replace('-', ' ').title()
     return render_template("search.html", keyword_title=keyword_title,
                            data=data)
