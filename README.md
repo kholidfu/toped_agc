@@ -41,7 +41,7 @@ like below
 
 	db.product.dropIndex("title_text_description_text")
 
-### Re-create Index with weight
+### Re-create Index with weight and name it "TextIndex"
 
 	db.product.createIndex( { title: "text", description: "text" }, {weights: {title: 10, description: 5}, name: "TextIndex"} )
 
