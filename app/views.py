@@ -1,6 +1,7 @@
 import re
 
 from flask import render_template
+from flask import g
 from app import app
 
 from pymongo import MongoClient
@@ -8,11 +9,34 @@ import feedparser
 import requests
 from bs4 import BeautifulSoup as bs
 import shortuuid
+import slugify
 
 
 # build db connections
 client = MongoClient()
 db = client.toped
+
+
+CATEGORIES = {
+    'sepatu-cowok': 'Sepatu Cowok',
+    'sepatu-cewek': 'Sepatu Cewek',
+    'tas': 'Tas',
+    'setelan-cowok': 'Setelan Cowok',
+    'setelan-cewek': 'Setelan Cewek',
+    'kaos-cowok': 'Kaos Cowok',
+    'kaos-cewek': 'Kaos Cewek',
+    'legging': 'Legging',
+    'piyama': 'Piyama',
+    'rok': 'Rok',
+    'jaket-cowok': 'Jaket Cowok',
+    'jaket-cewek': 'Jaket Cewek',
+}
+
+
+@app.context_processor
+def categories():
+    return {'categories': CATEGORIES}
+
 
 @app.template_filter('get_harga')
 def get_harga(s):
@@ -131,9 +155,10 @@ def detail(oid):
 @app.route("/search/<keyword>")
 def search(keyword):
     """Search page."""
-    # import pdb; pdb.set_trace()
     data = db.product.find({'$text': {'$search': keyword}})
-    return render_template("search.html", data=data)
+    keyword_title = keyword.replace('-', ' ').title()
+    return render_template("search.html", keyword_title=keyword_title,
+                           data=data)
 
 @app.route("/about")
 def about():

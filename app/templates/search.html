@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Index{{super()}}{% endblock %}
+{% block title %}Jual {{ keyword_title }}{{super()}}{% endblock %}
 
 {% block content %}
 <div class="container">
@@ -7,19 +7,9 @@
     <div class="col-md-3">
       <p class="lead">CARI</p>
       <div class="list-group">
-        <a href="{{ url_for('search', keyword='sepatu-cowok') }}" class="list-group-item">Sepatu Cowok</a>
-	<a href="#" class="list-group-item">Sepatu Cewek</a>
-        <a href="#" class="list-group-item">Tas</a>
-        <a href="#" class="list-group-item">Setelan Cowok</a>
-	<a href="#" class="list-group-item">Kaos Cowok</a>
-	<a href="#" class="list-group-item">Legging</a>
-	<a href="#" class="list-group-item">Piyama</a>
-	<a href="#" class="list-group-item">Rok</a>
-	<a href="#" class="list-group-item">Jaket Cowok</a>
-	<a href="#" class="list-group-item">Jaket Cewek</a>
-	<a href="#" class="list-group-item">Piyama</a>
-	<a href="#" class="list-group-item">Piyama</a>
-	<a href="#" class="list-group-item">Piyama</a>
+	{% for category in categories %}
+	<a href="{{ url_for('search', keyword=category) }}" class="list-group-item">{{ categories[category] }}</a>
+	{% endfor %}
       </div>
     </div>
     
