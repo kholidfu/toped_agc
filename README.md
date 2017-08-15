@@ -75,11 +75,12 @@ So much work todo, easy brad... Do it one by one...
 - [x] full-text-search on title and description
 - [x] add hit counter (masih ada bug, incr by 2?)
 - [x] add simple search feature
+- [x] remove all kind of links from description, kadang kecantol link
+  ke tokopedia
 - [ ] save customer data
 - [ ] save image
 - [ ] show related product
 - [ ] fix pricing
-- [ ] remove all kind of links from description, kadang kecantol link ke tokopedia
 
 #### OPTIONAL
 - [ ] filter only from good reputation seller
