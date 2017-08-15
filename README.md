@@ -77,6 +77,7 @@ So much work todo, easy brad... Do it one by one...
 - [x] add simple search feature
 - [x] remove all kind of links from description, kadang kecantol link
   ke tokopedia
+- [ ] search pagination
 - [ ] save customer data
 - [ ] save image
 - [ ] show related product
