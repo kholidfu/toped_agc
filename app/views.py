@@ -35,6 +35,7 @@ CATEGORIES = {
 
 @app.context_processor
 def categories():
+    """define categories, available in the whole template."""
     return {'categories': CATEGORIES}
 
 
