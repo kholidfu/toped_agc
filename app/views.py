@@ -1,7 +1,7 @@
 import re
 
 from flask import render_template
-from flask import g
+from flask import request, redirect, url_for
 from app import app
 
 from pymongo import MongoClient
@@ -157,10 +157,28 @@ def detail(oid):
     # RENDER DATA INTO TEMPLATE
     return render_template("detail.html", data=data)
 
+@app.route("/category/<cat_name>")
+def category(cat_name):
+    """category page."""
+    data = db.product.find({'$text': {'$search': cat_name}}, {'score':
+                                                             {'$meta':
+                                                              'textScore'}}).sort([('score', {'$meta': 'textScore'})])
+    cat_name = cat_name.replace('-', ' ').title()
+    return render_template("category.html", cat_name=cat_name,
+                           data=data)
+
+@app.route("/search")
+def redirect_search():
+    """Redirect search to search route."""
+    keyword = request.args.get('keyword').replace(' ', '-')
+    return redirect(url_for('search', keyword=keyword))
+
 @app.route("/search/<keyword>")
 def search(keyword):
     """Search page."""
-    data = db.product.find({'$text': {'$search': keyword}}, {'score': {'$meta': 'textScore'}}).sort([('score', {'$meta': 'textScore'})])
+    data = db.product.find({'$text': {'$search': keyword}}, {'score':
+                                                             {'$meta':
+                                                              'textScore'}}).sort([('score', {'$meta': 'textScore'})])
     keyword_title = keyword.replace('-', ' ').title()
     return render_template("search.html", keyword_title=keyword_title,
                            data=data)
