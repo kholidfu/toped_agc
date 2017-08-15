@@ -64,18 +64,22 @@ def markup(price):
 @app.template_filter('markup_price_for_detail_page')
 def markup_price_for_detail_page(price):
     """return markuped price."""
-    # price = price.replace(".", "")
-    # price = int(price)
-    # price = price * 2.0
     return "{:0,.0f}".format(price).replace(",", ".")
 
 @app.template_filter('mongoinsert')
 def mongoinsert(url):
+    """insert url and oid data into mongodb."""
     item_exist = db.product.find_one({'url': url})
     oid = shortuuid.uuid(name=url)
     if not item_exist:
         db.product.insert({'url': url, 'oid': oid})
     return oid
+
+@app.template_filter('squared')
+def squared(url):
+    """return squared image from toped link."""
+    return url.replace('/300/', '/300-square/')
+
 
 @app.route("/")
 def index():
