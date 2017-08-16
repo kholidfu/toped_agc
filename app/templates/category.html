@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Jual {{ keyword_title }}{{super()}}{% endblock %}
+{% block title %}Jual {{ cat_name }}{{super()}}{% endblock %}
 
 {% block content %}
 <div class="container">
@@ -76,6 +76,12 @@
           <a class="btn btn-primary" target="_blank" href="http://maxoffsky.com/code-blog/laravel-shop-tutorial-1-building-a-review-system/">View Tutorial</a>
         </div>
       </div>
+
+      <br />
+      <hr>
+      {{ pagination.info }}
+      {{ pagination.links }}
+      
     </div>
   </div>  
 </div>

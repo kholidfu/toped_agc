@@ -10,6 +10,7 @@ import requests
 from bs4 import BeautifulSoup as bs
 import shortuuid
 import slugify
+from flask_paginate import Pagination, get_page_parameter
 
 
 # build db connections
@@ -160,12 +161,23 @@ def detail(oid):
 @app.route("/category/<cat_name>")
 def category(cat_name):
     """category page."""
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    per_page = 3
+    offset = (page - 1) * per_page
+
     data = db.product.find({'$text': {'$search': cat_name}}, {'score':
                                                              {'$meta':
-                                                              'textScore'}}).sort([('score', {'$meta': 'textScore'})])
+                                                              'textScore'}}).sort([('score', {'$meta': 'textScore'})]).skip(offset).limit(per_page)
+    pagination = Pagination(page=page,
+                            per_page=per_page,
+                            total=data.count(),
+                            css_framework='bootstrap3',
+                            search=False,
+                            record_name='products')
+
     cat_name = cat_name.replace('-', ' ').title()
     return render_template("category.html", cat_name=cat_name,
-                           data=data)
+                           data=data, pagination=pagination)
 
 @app.route("/search")
 def redirect_search():
@@ -176,12 +188,26 @@ def redirect_search():
 @app.route("/search/<keyword>")
 def search(keyword):
     """Search page."""
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    per_page = 3
+    offset = (page - 1) * per_page
     data = db.product.find({'$text': {'$search': keyword}}, {'score':
                                                              {'$meta':
-                                                              'textScore'}}).sort([('score', {'$meta': 'textScore'})])
+                                                              'textScore'}}).sort([('score', {'$meta': 'textScore'})]).skip(offset).limit(per_page)
+    
+    pagination = Pagination(page=page,
+                            per_page=per_page,
+                            total=data.count(),
+                            css_framework='bootstrap3',
+                            search=False,
+                            record_name='products')
+    
     keyword_title = keyword.replace('-', ' ').title()
-    return render_template("search.html", keyword_title=keyword_title,
-                           data=data)
+    return render_template("search.html",
+                           keyword_title=keyword_title,
+                           data=data,
+                           pagination=pagination
+    )
 
 @app.route("/about")
 def about():
