@@ -93,8 +93,8 @@ So much work todo, easy brad... Do it one by one...
 - [x] remove all kind of links from description, kadang kecantol link
   ke tokopedia
 - [x] add more weight to title in search results
-- [ ] search pagination
-- [ ] category pagination
+- [x] search pagination
+- [x] category pagination
 - [ ] save customer data
 - [ ] save image
 - [ ] show related product
