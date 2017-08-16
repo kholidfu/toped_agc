@@ -115,6 +115,8 @@ So much work todo, easy brad... Do it one by one...
 - [ ] better template to ensure customers
 - [ ] only show images if it exists
 - [ ] show price range
+- [ ] about page
+- [ ] contact page
 
 ### SEO
 #### ONPAGE
